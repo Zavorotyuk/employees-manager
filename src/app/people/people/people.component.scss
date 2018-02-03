@@ -1,0 +1,137 @@
+.empl-container {
+  display: inline-flex;
+  .empl-list, .add-empl {
+    display: inline-block;
+  }
+  .empl-list {
+    width: 70%;
+    .search-employee {
+      margin-left: 10px;
+    }
+    .empl-item {
+      display: inline-block;
+      margin: 10px;
+      width: calc(25% - 30px);
+    }
+  }
+  .add-empl {
+    width: 30%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .empl-item {}
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .empl-container {
+    display: flex;
+    max-width: 980px;
+    margin: 0 auto;
+
+    .add-empl {
+      width: 25%;
+    }
+
+    .empl-list {
+      width: 75%;
+
+      .empl-item {
+        width: 31.3%;
+        margin: 0 0 15px;
+        padding: 0 5px;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .empl-container {
+    display: block;
+    width: 100%;
+    max-width: 750px;
+    margin: 0 auto;
+
+    .empl-list, .add-empl {
+      width: 100%;
+
+      .empl-item {
+        width: 33.3%;
+        margin: 0 0 15px;
+        padding: 0 5px;
+        box-sizing: border-box;
+        text-align: center;
+
+        .mat-card {
+          display: inline-block;
+          vertical-align: top;
+          width: 100%;
+          max-width: 180px;
+          text-align: left;
+        }
+      }
+      .add-empl__form {
+        max-width: 400px;
+      }
+    }
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .empl-container {
+    display: block;
+
+    .empl-list, .add-empl {
+      width: 100%;
+
+      .empl-item {
+        width: 50%;
+        margin: 0 0 15px;
+        padding: 0 5px;
+        box-sizing: border-box;
+        text-align: center;
+
+        .mat-card {
+          display: inline-block;
+          vertical-align: top;
+          width: 100%;
+          max-width: 250px;
+          text-align: left;
+        }
+      }
+      .add-empl__form {
+        max-width: 400px;
+      }
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 479px) {
+  .empl-container {
+    display: block;
+
+    .empl-list, .add-empl {
+      width: 100%;
+
+      .empl-item {
+        width: 100%;
+        margin: 0 0 15px;
+        padding: 0 5px;
+        box-sizing: border-box;
+        text-align: center;
+
+        .mat-card {
+          display: inline-block;
+          vertical-align: top;
+          width: 100%;
+          max-width: 180px;
+          text-align: left;
+        }
+      }
+      .add-empl__form {
+        max-width: 400px;
+      }
+    }
+  }
+}
