@@ -1,27 +1,47 @@
 .empl-container {
-  display: inline-flex;
-  .empl-list, .add-empl {
-    display: inline-block;
-  }
+  display: flex;
+  margin-top: 30px;
   .empl-list {
     width: 70%;
+    padding: 10px;
     .search-employee {
-      margin-left: 10px;
+      display: flex;
+      justify-content: flex-end;
+      .search-employee__input {
+        width: 150px;
+      }
     }
-    .empl-item {
-      display: inline-block;
-      margin: 10px;
-      width: calc(25% - 30px);
+    .table-container {
+      display: flex;
+      flex-direction: column;
+      min-width: 300px;
+    }
+
+    .mat-table {
+      overflow: auto;
+      max-height: 500px;
+    }
+
+    .stars-cell {
+      display: flex;
+      justify-content: flex-start;
     }
   }
   .add-empl {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
     width: 30%;
+    form {
+      max-width: 300px;
+      .mat-form-field {
+        font-size: 14px;
+        width: 100%;
+      }
+    }
   }
 }
 
-@media (min-width: 1200px) {
-  .empl-item {}
-}
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .empl-container {
@@ -35,13 +55,6 @@
 
     .empl-list {
       width: 75%;
-
-      .empl-item {
-        width: 31.3%;
-        margin: 0 0 15px;
-        padding: 0 5px;
-        box-sizing: border-box;
-      }
     }
   }
 }
@@ -55,28 +68,10 @@
 
     .empl-list, .add-empl {
       width: 100%;
-
-      .empl-item {
-        width: 33.3%;
-        margin: 0 0 15px;
-        padding: 0 5px;
-        box-sizing: border-box;
-        text-align: center;
-
-        .mat-card {
-          display: inline-block;
-          vertical-align: top;
-          width: 100%;
-          max-width: 180px;
-          text-align: left;
-        }
-      }
-      .add-empl__form {
-        max-width: 400px;
       }
     }
   }
-}
+
 
 @media (min-width: 480px) and (max-width: 767px) {
   .empl-container {
@@ -84,25 +79,6 @@
 
     .empl-list, .add-empl {
       width: 100%;
-
-      .empl-item {
-        width: 50%;
-        margin: 0 0 15px;
-        padding: 0 5px;
-        box-sizing: border-box;
-        text-align: center;
-
-        .mat-card {
-          display: inline-block;
-          vertical-align: top;
-          width: 100%;
-          max-width: 250px;
-          text-align: left;
-        }
-      }
-      .add-empl__form {
-        max-width: 400px;
-      }
     }
   }
 }
@@ -113,25 +89,6 @@
 
     .empl-list, .add-empl {
       width: 100%;
-
-      .empl-item {
-        width: 100%;
-        margin: 0 0 15px;
-        padding: 0 5px;
-        box-sizing: border-box;
-        text-align: center;
-
-        .mat-card {
-          display: inline-block;
-          vertical-align: top;
-          width: 100%;
-          max-width: 180px;
-          text-align: left;
-        }
-      }
-      .add-empl__form {
-        max-width: 400px;
-      }
     }
   }
 }

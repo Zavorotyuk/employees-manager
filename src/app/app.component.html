@@ -1,16 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-  <mat-toolbar>
-    <mat-toolbar-row>
-      <span class="toolbar-title">Employees manager</span>
-
-      <span class="toolbar-spacer"></span>
-
-      <a mat-button [routerLink]="['/people']" class="toolbar-button">People</a>
-      <a mat-button [routerLink]="['/visuals']" class="toolbar-button">Visuals</a>
-
-    </mat-toolbar-row>
-  </mat-toolbar>
+  <div class="navigation">
+    <a [routerLink]="['/people']" routerLinkActive="is-active" class="navigation-item">People</a>
+    <a [routerLink]="['/visuals']" routerLinkActive="is-active" class="navigation-item">Visuals</a>
+  </div>
   <div class="content">
     <router-outlet></router-outlet>
   </div>

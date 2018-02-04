@@ -4,7 +4,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { appRouter } from './app.router';
 import { environment } from '../environments/environment';
@@ -21,7 +20,6 @@ import { AppComponent } from './app.component';
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
     appRouter,
-    SharedModule,
     CoreModule
   ],
   providers: [],

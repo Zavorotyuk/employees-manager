@@ -1,31 +1,61 @@
 <div class="empl-container" *ngIf="!loading">
   <div class="empl-list">
     <div class="search-employee">
-      <mat-form-field>
-        <input type="search" matInput [(ngModel)]="searchTerm" placeholder="Search" />
+      <mat-form-field class="search-employee__input">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
       </mat-form-field>
     </div>
-    <div class="empl-item" *ngFor="let person of employeesList | filter : searchTerm ">
-      <mat-card>
-        <mat-card-title>{{person.firstName}} {{person.lastName}}</mat-card-title>
-        <mat-card-content>
-          <div>Age: {{person.age}}</div>
-          <div>Level: {{person.level}}</div>
-          <div>Skill: {{person.skill}}</div>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-icon-button>
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button (click)="deleteEmployee(person.key)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-card-actions>
-      </mat-card>
+    <div class="table-container mat-elevation-z8">
+      <mat-table #table [dataSource]="employeesList">
+
+        <ng-container matColumnDef="Name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let person"> {{person.firstName}} {{person.lastName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Age">
+          <mat-header-cell *matHeaderCellDef> Age </mat-header-cell>
+          <mat-cell *matCellDef="let person"> {{person.age}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Skill">
+          <mat-header-cell *matHeaderCellDef> Skill </mat-header-cell>
+          <mat-cell *matCellDef="let person"> {{person.skill}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Level">
+          <mat-header-cell *matHeaderCellDef> Level </mat-header-cell>
+          <mat-cell class="stars-cell" *matCellDef="let person">
+             <star-rating-comp
+               [size]="'big'"
+               [numOfStars]="3"
+               [readOnly]="true"
+               [staticColor]="'default'"
+               [starType]="'svg'"
+               [rating]="person.level"></star-rating-comp>
+           </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Actions">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let person">
+            <div class="navigation">
+              <button mat-icon-button>
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteEmployee(person.key)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+           </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
     </div>
   </div>
   <div class="add-empl">
-    <h3>Add employee</h3>
     <form [formGroup]="addEmployeeForm" class="add-empl__form" (ngSubmit)="addEmployee(addEmployeeForm.value)">
       <mat-form-field>
         <input matInput placeholder="First name" formControlName="firstName"/>
@@ -51,5 +81,10 @@
       </div>
     </form>
   </div>
+
+
+
+
+
 </div>
 <ngx-loading [show]="loading"></ngx-loading>

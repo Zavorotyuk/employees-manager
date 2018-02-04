@@ -2,14 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+import { StarRatingModule } from 'angular-star-rating';
+
 import {
   MatToolbarModule,
   MatButtonModule,
   MatInputModule,
   MatSelectModule,
   MatCardModule,
+  MatDialogModule,
+  MatTableModule,
   MatIconModule } from '@angular/material';
-import { FilterPipe } from './pipes/filter.pipe';
 
 
 const materialModules = [
@@ -18,7 +21,9 @@ const materialModules = [
   MatCardModule,
   MatIconModule,
   MatInputModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDialogModule,
+  MatTableModule
 ];
 
 @NgModule({
@@ -27,6 +32,7 @@ const materialModules = [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    StarRatingModule,
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.rectangleBounce,
       fullScreenBackdrop: true,
@@ -36,14 +42,14 @@ const materialModules = [
 
     })
   ],
-  declarations: [FilterPipe],
+  declarations: [],
   exports: [
     ...materialModules,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     LoadingModule,
-    FilterPipe
+    StarRatingModule
   ]
 })
 export class SharedModule { }

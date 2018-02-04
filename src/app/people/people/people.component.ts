@@ -3,6 +3,9 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database'
 import { EmployeeService } from '../../core/employee.service';
 import { Observable } from 'rxjs';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { MatTableDataSource } from '@angular/material';
+import { ConfirmationComponent } from '../modals/confirmation/confirmation.component';
 
 
 @Component({
@@ -12,9 +15,10 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 })
 export class PeopleComponent implements OnInit {
 
-  employeesList: object[];
+  employeesList: MatTableDataSource<any>;
   addEmployeeForm: FormGroup;
   loading: boolean = true;
+  displayedColumns = ['Name', 'Age', 'Skill', 'Level', 'Actions'];
 
   skills: object[] = [
     {viewValue: 'JavaScript'},
@@ -24,9 +28,11 @@ export class PeopleComponent implements OnInit {
   ]
 
 
+
   constructor(
     private employeeService: EmployeeService,
     private fb: FormBuilder,
+    private dialog: MatDialog
   ) {
       this.addEmployeeForm = fb.group({
         'firstName': [null, Validators.required],
@@ -40,7 +46,7 @@ export class PeopleComponent implements OnInit {
   ngOnInit() {
     this.employeeService.getEmployees().subscribe(
       data => {
-        this.employeesList = data;
+        this.employeesList = new MatTableDataSource(data);
         this.loading = false;
       }
     )
@@ -52,8 +58,20 @@ export class PeopleComponent implements OnInit {
   }
 
   deleteEmployee(key) {
-    this.employeeService.deleteEmployee(key);
+    let dialogRef = this.dialog.open(ConfirmationComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.employeeService.deleteEmployee(key);
+      }
+    });
   }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.employeesList.filter = filterValue;
+ }
 
 
 }
