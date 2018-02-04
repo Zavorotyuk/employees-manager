@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeeService } from '../../core/employee.service';
+
 
 @Component({
   selector: 'app-visuals',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisualsComponent implements OnInit {
 
-  constructor() { }
+  employeesList: object[];
+  loading: boolean = true;
+
+  constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
+    this.employeeService.getEmployees().subscribe(
+      data => {
+        this.employeesList = data;
+        this.loading = false;
+      }
+    )
   }
 
 }

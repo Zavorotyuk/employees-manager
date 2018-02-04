@@ -1,3 +1,4 @@
-<p>
-  visuals works!
-</p>
+<div *ngIf="!loading">
+  <app-pie-chart groupBy="skill" [dataSet]="employeesList"></app-pie-chart>
+  <app-pie-chart groupBy="level" [dataSet]="employeesList"></app-pie-chart>
+</div>

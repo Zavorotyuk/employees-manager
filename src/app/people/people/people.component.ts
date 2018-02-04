@@ -55,7 +55,7 @@ export class PeopleComponent implements OnInit {
 
   addEmployee(formValue) {
     this.employeeService.addEmployee(formValue);
-    this.addEmployeeForm.reset();
+    this.resetForm();
   }
 
   deleteEmployee(key) {
@@ -79,6 +79,15 @@ export class PeopleComponent implements OnInit {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.employeesList.filter = filterValue;
+ }
+
+ resetForm() {
+   this.addEmployeeForm.reset();
+   this.addEmployeeForm.markAsTouched();
+   Object.keys(this.addEmployeeForm.controls).forEach((name) => {
+     let control = this.addEmployeeForm.controls[name];
+     control.setErrors(null);
+   });
  }
 
 
