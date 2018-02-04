@@ -1,71 +1,74 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import * as d3 from 'd3';
 
 
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
-  styleUrls: ['./pie-chart.component.scss']
+  styleUrls: ['./pie-chart.component.scss'],
 })
+
 export class PieChartComponent implements OnInit {
 
   @Input() dataSet : object[];
-  @Input() groupBy : string;
 
- private width: number;
- private height: number;
- private radius: number;
+  constructor() {}
 
- private arc: any;
- private pie: any;
- private color: any;
- private svg: any;
- private nest: any;
+  ngOnInit() {
+    this.drawGroupedBy('skill');
+    this.drawGroupedBy('level');
+    this.drawGroupedBy('age');
+  }
 
 
- constructor() {}
+  drawGroupedBy(groupBy) {
+    let svg = d3.select(`#${groupBy}`);
 
- ngOnInit() {
-   this.initSvg();
-   this.drawChart(this.nest);
- }
+    let width = +svg.attr('width');
+    let height = +svg.attr('height');
+    let radius = Math.min(width, height) / 2;
 
- private initSvg() {
+    let color = d3.schemeCategory20c;
 
-   this.svg = d3.select('svg');
+    const arc: any = d3.arc()
+            .outerRadius(radius - 10)
+            .innerRadius(radius - 70);
 
+    const nest: any = d3.nest()
+                .key(d => {
+                  if(groupBy !== 'age') return d[groupBy];
+                  return this.getAgeGroup(d['age']);
+                })
+                .entries(this.dataSet);
 
-   this.width = +this.svg.attr('width');
-   this.height = +this.svg.attr('height');
-   this.radius = Math.min(this.width, this.height) / 2;
+    let pie = d3.pie()
+                .sort(null)
+                .value((d: any) => d.values.length );
 
-   this.color = d3.schemeCategory20c;
-
-   this.arc = d3.arc()
-                     .outerRadius(this.radius - 10)
-                     .innerRadius(this.radius - 70);
-
-   this.nest = d3.nest()
-                    .key(d => d[this.groupBy])
-                    .entries(this.dataSet);
-
-    this.pie = d3.pie()
-                      .sort(null)
-                      .value((d: any) => d.values.length );
-
-   this.svg = d3.select('svg')
+    svg = d3.select(`#${groupBy}`)
                 .append('g')
-                .attr('transform', 'translate(' + this.width / 2 + ',' + this.height / 2 + ')');
- }
+                .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
+    const g = svg.selectAll('.arc')
+                      .data(pie(nest))
+                      .enter().append('g');
+
+    g.append('path').attr('d', arc)
+                     .style('fill', (d: any, i: any) => color[i] )
 
 
- private drawChart(data) {
-   const g = this.svg.selectAll('.arc')
-                     .data(this.pie(data))
-                     .enter().append('g');
+  }
 
-  g.append('path').attr('d', this.arc)
-                  .style('fill', (d: any, i: any) => this.color[i] );
- }
+  getAgeGroup(age) {
+    let ageGroup = null;
+    if (age >= 18 && age <= 25 ) {
+      ageGroup = '18-25';
+    } else if (age > 25 && age <= 32) {
+      ageGroup = '26-32';
+    } else if (age > 32 && age <= 100) {
+      ageGroup = '26-32';
+    }
+    return ageGroup;
+  }
 
 }

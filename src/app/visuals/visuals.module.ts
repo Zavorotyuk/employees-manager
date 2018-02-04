@@ -9,6 +9,6 @@ import { SharedModule } from '../shared/shared.module';
     visualsRouter,
     SharedModule
   ],
-  declarations: [VisualsComponent, PieChartComponent]
+  declarations: [VisualsComponent, PieChartComponent],
 })
 export class VisualsModule { }
