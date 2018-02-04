@@ -6,6 +6,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
 import { ConfirmationComponent } from '../modals/confirmation/confirmation.component';
+import { UpdateEmployeeComponent } from '../modals/update-employee/update-employee.component';
 
 
 @Component({
@@ -61,9 +62,16 @@ export class PeopleComponent implements OnInit {
     let dialogRef = this.dialog.open(ConfirmationComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        this.employeeService.deleteEmployee(key);
-      }
+      if(result) this.employeeService.deleteEmployee(key);
+    });
+  }
+
+  updateEmployee(employee) {
+    let dialogRef = this.dialog.open(
+      UpdateEmployeeComponent, {data: employee, width: '400px'});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) this.employeeService.updateEmployee(employee.key, result);
     });
   }
 

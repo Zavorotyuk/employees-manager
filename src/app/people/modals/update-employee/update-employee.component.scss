@@ -1,0 +1,11 @@
+.update-empl {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  form {
+    .mat-form-field {
+      font-size: 14px;
+      width: 100%;
+    }
+  }
+}

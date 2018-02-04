@@ -40,7 +40,7 @@
           <mat-header-cell *matHeaderCellDef> </mat-header-cell>
           <mat-cell *matCellDef="let person">
             <div class="navigation">
-              <button mat-icon-button>
+              <button mat-icon-button (click)="updateEmployee(person)">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button (click)="deleteEmployee(person.key)">
@@ -81,10 +81,5 @@
       </div>
     </form>
   </div>
-
-
-
-
-
 </div>
 <ngx-loading [show]="loading"></ngx-loading>
