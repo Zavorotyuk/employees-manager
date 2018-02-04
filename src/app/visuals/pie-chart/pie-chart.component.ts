@@ -56,6 +56,14 @@ export class PieChartComponent implements OnInit {
     g.append('path').attr('d', arc)
                      .style('fill', (d: any, i: any) => color[i] )
 
+    g.append("text").attr("transform", d => {
+                      const _d = arc.centroid(d);
+                      return "translate(" + _d + ")";
+                      })
+                      .attr("dy", ".50em")
+                      .style("text-anchor", "middle")
+                      .text(d => d.data['key']);
+
 
   }
 
@@ -66,7 +74,7 @@ export class PieChartComponent implements OnInit {
     } else if (age > 25 && age <= 32) {
       ageGroup = '26-32';
     } else if (age > 32 && age <= 100) {
-      ageGroup = '26-32';
+      ageGroup = '33-100';
     }
     return ageGroup;
   }
