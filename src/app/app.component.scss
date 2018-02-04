@@ -1,0 +1,23 @@
+.container {
+  .navigation {
+    display: flex;
+    justify-content: center;
+    .navigation-item {
+      margin: 5px;
+      font-size: 18px;
+      font-weight: 600;
+      text-decoration: none;
+      color: rgba(46, 39, 39, 0.65);
+    }
+    .is-active {
+      text-decoration: underline;
+      color: rgba(46, 39, 39, 1);
+    }
+    .navigation-item:hover {
+      text-decoration: underline;
+    }
+  }
+  .content {
+    margin: 10px;
+  }
+}
