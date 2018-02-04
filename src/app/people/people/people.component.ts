@@ -38,7 +38,7 @@ export class PeopleComponent implements OnInit {
       this.addEmployeeForm = fb.group({
         'firstName': [null, Validators.required],
         'lastName' : [null, Validators.required],
-        'age' : [null, Validators.compose([Validators.required, Validators.min(5), Validators.max(90)])],
+        'age' : [null, Validators.compose([Validators.required, Validators.min(18), Validators.max(100)])],
         'level': [null, Validators.compose([Validators.required, Validators.min(1), Validators.max(3)])],
         'skill': [null, Validators.required]
       })
